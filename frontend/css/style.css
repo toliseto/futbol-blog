@@ -1,0 +1,239 @@
+:root {
+  --pitch-dark: #143622;
+  --pitch: #1f5c39;
+  --pitch-light: #2c7a4b;
+  --chalk: #f5f4ef;
+  --ink: #16211c;
+  --card-yellow: #f2b705;
+  --line: rgba(245, 244, 239, 0.18);
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--chalk);
+  color: var(--ink);
+}
+
+/* Scoreboard header */
+.scoreboard {
+  background: var(--pitch-dark);
+  color: var(--chalk);
+  border-bottom: 4px solid var(--card-yellow);
+}
+
+.scoreboard__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scoreboard__brand {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scoreboard__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--card-yellow);
+  display: inline-block;
+}
+
+.scoreboard__nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--chalk);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-link.is-active,
+.nav-link:hover {
+  background: var(--card-yellow);
+  color: var(--ink);
+  border-color: var(--card-yellow);
+}
+
+/* Pitch (main content area) */
+.pitch {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  min-height: 60vh;
+}
+
+.pitch__intro h1,
+.view h1 {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+  color: var(--pitch-dark);
+}
+
+.pitch__intro p {
+  color: #4b5a51;
+  margin: 0 0 32px;
+}
+
+.view[hidden] {
+  display: none;
+}
+
+/* Posts grid styled like match tickets */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid #e2e0d6;
+  border-left: 6px solid var(--pitch);
+  border-radius: 6px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 54, 34, 0.12);
+}
+
+.post-card__meta {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pitch);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.post-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.post-card p {
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Post detail */
+.back-link {
+  background: none;
+  border: none;
+  color: var(--pitch);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.post-detail h1 {
+  font-size: 2.1rem;
+}
+
+.post-detail .post-card__meta {
+  margin-bottom: 18px;
+}
+
+.post-detail__body {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #2a332d;
+  white-space: pre-line;
+}
+
+.post-detail img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+}
+
+.post-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.9rem;
+  gap: 6px;
+  color: var(--pitch-dark);
+}
+
+.post-form input,
+.post-form textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid #d7d4c8;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.btn-primary {
+  align-self: flex-start;
+  background: var(--pitch);
+  color: var(--chalk);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--pitch-light);
+}
+
+.status-text {
+  color: #6b6b6b;
+  font-size: 0.9rem;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+  color: #7a8a7f;
+  border-top: 1px solid #e2e0d6;
+}
