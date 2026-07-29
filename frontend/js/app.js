@@ -1,5 +1,5 @@
 // Backend API adresi (gerekirse değiştirin)
-const API_URL = 'http://localhost:5000/api/posts';
+const API_URL = 'soothing-friendship-production-c654.up.railway.app';
 
 const views = {
   list: document.getElementById('view-list'),
