@@ -2,7 +2,7 @@
 
 Frontend ve backend'i tamamen ayrı, modüler dosyalardan oluşan basit bir futbol blog sitesi.
 
-```
+```~
 futbol-blog/
 ├── backend/                  # Node.js + Express + PostgreSQL API
 │   ├── database/
