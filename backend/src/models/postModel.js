@@ -16,11 +16,11 @@ async function getPostById(id) {
 }
 
 // Yeni yazı oluştur
-async function createPost({ title, content, author, image_url }) {
+async function createPost({ title, content, author, image_url, user_id }) {
   const result = await pool.query(
-    `INSERT INTO posts (title, content, author, image_url)
-     VALUES ($1, $2, $3, $4) RETURNING *`,
-    [title, content, author, image_url]
+    `INSERT INTO posts (title, content, author, image_url, user_id)
+     VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [title, content, author, image_url, user_id]
   );
   return result.rows[0];
 }

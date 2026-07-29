@@ -26,15 +26,16 @@ async function getPost(req, res) {
 
 async function createPost(req, res) {
   try {
-    const { title, content, author, image_url } = req.body;
+    const { title, content, image_url } = req.body;
     if (!title || !content) {
       return res.status(400).json({ error: 'Başlık ve içerik zorunludur.' });
     }
     const newPost = await postModel.createPost({
       title,
       content,
-      author: author || 'Editör',
+      author: req.user.username, // Giriş yapan kullanıcının adı
       image_url: image_url || null,
+      user_id: req.user.id       // Kullanıcının ID'si
     });
     res.status(201).json(newPost);
   } catch (err) {
