@@ -1,5 +1,5 @@
-// Backend API adresi (gerekirse değiştirin)
-const API_URL = 'soothing-friendship-production-c654.up.railway.app';
+// Backend API adresi (Artık aynı sunucudan servis ediliyor)
+const API_URL = '/api/posts';
 
 const views = {
   list: document.getElementById('view-list'),
