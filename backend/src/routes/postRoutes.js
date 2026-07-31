@@ -1,13 +1,15 @@
-// /api/posts altındaki tüm endpoint tanımları
 const express = require('express');
 const router = express.Router();
 const postController = require('../controllers/postController');
-const { requireAuth, requireAdmin } = require('../middleware/auth');
+const { requireAuth, requireAuthorOrAdmin } = require('../middleware/auth');
 
+// Herkes okuyabilir
 router.get('/', postController.listPosts);
-router.get('/:id', postController.getPost);
-router.post('/', requireAuth, postController.createPost);
-router.put('/:id', requireAuth, postController.updatePost); // Sadece giriş yapan
-router.delete('/:id', requireAuth, requireAdmin, postController.deletePost); // Sadece admin
+router.get('/:slugOrId', postController.getPost);
+
+// Sadece yazar/editör/admin oluşturabilir, güncelleyebilir, silebilir
+router.post('/', requireAuth, requireAuthorOrAdmin, postController.createPost);
+router.patch('/:id', requireAuth, requireAuthorOrAdmin, postController.updatePost);
+router.delete('/:id', requireAuth, requireAuthorOrAdmin, postController.deletePost);
 
 module.exports = router;

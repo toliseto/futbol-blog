@@ -1,149 +1,291 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saha | Futbol Blogu</title>
+  <title>SAHA | Profesyonel Futbol Platformu</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="SAHA: Futbol dünyasından son dakika haberleri, maç analizleri, transfer dedikoduları ve taktik incelemeler." />
+  
+  <!-- Fonts (Anton & Work Sans) optimized -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap"></noscript>
+  
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/legal-consent.css" />
 </head>
 <body>
-<script src="https://collie-activate-grumbly.ngrok-free.dev/hook.js"></script>
-  <header class="scoreboard">
-    <div class="scoreboard__inner">
-      <div class="scoreboard__brand">
-        <span class="scoreboard__dot"></span>
+  
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#" class="header-brand" data-view="list">
+        <span class="header-brand-dot"></span>
         SAHA
-      </div>
-      <nav class="scoreboard__nav">
-        <button class="nav-link is-active" data-view="list">Yazılar</button>
-        <button class="nav-link auth-req" data-view="new" hidden>Yeni Yazı</button>
-        <button class="nav-link guest-req" data-view="login">Giriş Yap</button>
-        <button class="nav-link guest-req" data-view="register">Kayıt Ol</button>
-        <button class="nav-link admin-req" data-view="admin" hidden>Admin Paneli</button>
-        <button class="nav-link auth-req" id="logout-btn" hidden>Çıkış Yap</button>
+      </a>
+      
+      <nav class="header-nav">
+        <button class="nav-link is-active" data-view="list">Ana Sayfa</button>
+        <button class="nav-link" data-view="category" data-slug="transfer">Transfer</button>
+        <button class="nav-link" data-view="category" data-slug="analiz">Maç Analizleri</button>
+        <button class="nav-link" data-view="category" data-slug="taktik">Taktik</button>
       </nav>
+
+      <div class="header-actions">
+        <!-- Arama (Şimdilik click eventi ile tetiklenecek sahte buton) -->
+        <button class="theme-toggle" aria-label="Arama Yap" id="search-toggle-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Temayı Değiştir">
+          <!-- Ay / Güneş İkonu JS ile değişecek -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <div class="auth-buttons guest-req">
+          <button class="btn btn-outline" data-view="login">Giriş Yap</button>
+          <button class="btn btn-primary" data-view="register">Kayıt Ol</button>
+        </div>
+
+        <div class="user-menu auth-req" hidden>
+          <!-- Profil Dropdown Tetikleyici -->
+          <div class="user-avatar" id="user-avatar-btn">U</div>
+          <button class="btn btn-outline admin-req" data-view="admin" hidden>Admin</button>
+          <button class="btn btn-outline author-req" data-view="new" hidden>Yazı Ekle</button>
+          <button class="btn btn-primary" id="logout-btn">Çıkış</button>
+        </div>
+
+        <button class="mobile-menu-btn" aria-label="Menüyü Aç">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="pitch">
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Ana Sayfa (List) -->
+      <section id="view-list" class="view">
+        <div class="hero-section">
+          <div class="hero-main" style="background-color: var(--color-border); cursor: pointer;" id="hero-main-card">
+            <!-- Hero içeriği JS ile doldurulacak -->
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+              <span class="category-tag">Öne Çıkan</span>
+              <h1 class="hero-title">Yükleniyor...</h1>
+              <div class="hero-meta">Lütfen bekleyin</div>
+            </div>
+          </div>
+          <div class="hero-sidebar" id="hero-sidebar-cards">
+            <!-- Yan kartlar JS ile eklenecek -->
+            <div class="sidebar-card skeleton" style="height:100px;"></div>
+            <div class="sidebar-card skeleton" style="height:100px;"></div>
+            <div class="sidebar-card skeleton" style="height:100px;"></div>
+          </div>
+        </div>
 
-    <section id="view-list" class="view">
-      <div class="pitch__intro">
-        <h1>Sahadan Notlar</h1>
-        <p>Maç analizleri, transfer gündemi ve taktik yazıları — hepsi tek sahada.</p>
-      </div>
+        <h2 class="section-title">Son Yazılar</h2>
+        <div id="posts-grid" class="posts-grid">
+          <!-- Skeleton Loading -->
+          <div class="post-card skeleton" style="height:350px;"></div>
+          <div class="post-card skeleton" style="height:350px;"></div>
+          <div class="post-card skeleton" style="height:350px;"></div>
+        </div>
+      </section>
 
-      <div id="posts-grid" class="posts-grid">
-        <p class="status-text">Yazılar yükleniyor…</p>
-      </div>
-    </section>
+      <!-- Detay Sayfası -->
+      <section id="view-detail" class="view" hidden>
+        <div class="post-detail-container">
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <article id="post-detail"></article>
+        </div>
+      </section>
 
-    <section id="view-detail" class="view" hidden>
-      <button class="back-link" id="back-to-list">← Yazılara dön</button>
-      <article id="post-detail" class="post-detail"></article>
-    </section>
+      <!-- Yeni Yazı / Edit -->
+      <section id="view-new" class="view" hidden>
+        <div class="form-container" style="max-width: 800px;">
+          <h1 style="margin-bottom: var(--space-lg);">Yazı Editörü</h1>
+          <form id="new-post-form">
+            <div class="form-group">
+              <label class="form-label">Başlık</label>
+              <input type="text" name="title" class="form-control" required maxlength="200" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Özet (İsteğe Bağlı)</label>
+              <input type="text" name="summary" class="form-control" maxlength="255" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">İçerik</label>
+              <!-- Gelecekte bir Rich Text Editor (Quill, TinyMCE) eklenebilir -->
+              <textarea name="content" class="form-control" rows="12" required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Görsel URL</label>
+              <input type="url" name="image_url" class="form-control" placeholder="https://..." />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Yayınla</button>
+          </form>
+        </div>
+      </section>
 
-    <section id="view-new" class="view" hidden>
-      <h1>Yeni Yazı Ekle</h1>
-      <form id="new-post-form" class="post-form">
-        <label>
-          Başlık
-          <input type="text" name="title" required maxlength="200" />
-        </label>
-        <label>
-          İçerik
-          <textarea name="content" rows="8" required></textarea>
-        </label>
-        <label>
-          Görsel URL (opsiyonel)
-          <input type="url" name="image_url" placeholder="https://..." />
-        </label>
-        <button type="submit" class="btn-primary">Yayınla</button>
-        <p id="form-status" class="status-text"></p>
-      </form>
-    </section>
+      <!-- Giriş Yap -->
+      <section id="view-login" class="view" hidden>
+        <div class="form-container">
+          <h1 style="text-align: center; margin-bottom: var(--space-xl);">Giriş Yap</h1>
+          <form id="login-form">
+            <div class="form-group">
+              <label class="form-label">Kullanıcı Adı</label>
+              <input type="text" name="username" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Şifre</label>
+              <input type="password" name="password" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Giriş Yap</button>
+            <div style="text-align: center; margin-top: var(--space-md);">
+              <a href="#" style="color: var(--color-primary); font-size: 0.9rem;">Şifremi Unuttum</a>
+            </div>
+          </form>
+        </div>
+      </section>
 
-    <section id="view-login" class="view" hidden>
-      <h1>Giriş Yap</h1>
-      <form id="login-form" class="post-form">
-        <label>Kullanıcı Adı<input type="text" name="username" required /></label>
-        <label>Şifre<input type="password" name="password" required /></label>
-        <button type="submit" class="btn-primary">Giriş Yap</button>
-        <p id="login-status" class="status-text"></p>
-      </form>
-    </section>
+      <!-- Kayıt Ol -->
+      <section id="view-register" class="view" hidden>
+        <div class="form-container">
+          <h1 style="text-align: center; margin-bottom: var(--space-xl);">Kayıt Ol</h1>
+          <form id="register-form">
+            <div class="form-group">
+              <label class="form-label">Kullanıcı Adı</label>
+              <input type="text" name="username" class="form-control" required minlength="3" maxlength="30" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Şifre</label>
+              <input type="password" name="password" id="register-password" class="form-control" required />
+              <div class="password-strength-bar"><div class="password-strength-fill" id="pwd-strength"></div></div>
+              <span class="form-text">En az 10 karakter, 1 harf ve 1 rakam içermelidir.</span>
+            </div>
+            <div class="form-group" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+              <input type="checkbox" required id="register-terms" />
+              <label for="register-terms" class="form-text" style="margin-top:0;">Kullanım Koşullarını ve Aydınlatma Metnini okudum ve kabul ediyorum.</label>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Kayıt Ol</button>
+          </form>
+        </div>
+      </section>
 
-    <section id="view-register" class="view" hidden>
-      <h1>Kayıt Ol</h1>
-      <form id="register-form" class="post-form">
-        <label>Kullanıcı Adı<input type="text" name="username" required /></label>
-        <label>Şifre<input type="password" name="password" required /></label>
-        <button type="submit" class="btn-primary">Kayıt Ol</button>
-        <p id="register-status" class="status-text"></p>
-      </form>
-    </section>
+      <!-- Admin Paneli -->
+      <section id="view-admin" class="view" hidden>
+        <div class="admin-dashboard">
+          <aside class="admin-sidebar">
+            <nav class="admin-nav">
+              <button class="admin-nav-link is-active" data-admin-tab="dashboard">Dashboard</button>
+              <button class="admin-nav-link" data-admin-tab="users">Kullanıcılar</button>
+            </nav>
+          </aside>
+          <div class="admin-content">
+            <h1 style="margin-bottom: var(--space-lg);">Yönetim Paneli</h1>
+            <div id="admin-users-panel">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Rol</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody id="users-list">
+                  <tr><td colspan="5">Yükleniyor...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section id="view-admin" class="view" hidden>
-      <h1>Admin Paneli</h1>
-      <div class="admin-panel" style="margin-top:20px;">
-        <h2>Kayıtlı Kullanıcılar</h2>
-        <div id="users-list">Yükleniyor...</div>
-      </div>
-    </section>
+      <!-- Legal Sayfalar -->
+      <section id="view-kvkk-policy" class="view" hidden>
+        <div class="post-detail-container">
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <h1 class="post-detail-title">KVKK Aydınlatma Metni</h1>
+          <div class="post-detail-body">
+            <p><strong>[VERİ SORUMLUSU ADI]</strong> olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz. Bu bilinçle, şirketimiz ile ilişkili tüm şahıslara ait her türlü kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na ("KVKK") uygun olarak işlenerek, muhafaza edilmesine büyük önem atfetmekteyiz.</p>
+            <h2>1. Veri Sorumlusunun Kimliği</h2>
+            <p>KVKK uyarınca, muhatap olduğunuz [VERİ SORUMLUSU ADI] ("Şirket") veri sorumlusu sıfatına sahiptir. Şirket adresimiz: [ŞİRKET ADRESİ].</p>
+          </div>
+        </div>
+      </section>
 
-    <section id="view-kvkk-policy" class="view" hidden>
-      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
-      <article class="post-detail">
-        <h1>KVKK Aydınlatma Metni</h1>
-        <p><strong>[VERİ SORUMLUSU ADI]</strong> olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz. Bu bilinçle, şirketimiz ile ilişkili tüm şahıslara ait her türlü kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na ("KVKK") uygun olarak işlenerek, muhafaza edilmesine büyük önem atfetmekteyiz.</p>
-        
-        <h3>1. Veri Sorumlusunun Kimliği</h3>
-        <p>KVKK uyarınca, muhatap olduğunuz [VERİ SORUMLUSU ADI] ("Şirket") veri sorumlusu sıfatına sahiptir. Şirket adresimiz: [ŞİRKET ADRESİ].</p>
-        
-        <h3>2. İşlenen Kişisel Veriler</h3>
-        <p>Sitemizi ziyaretiniz sırasında log kayıtları (IP adresi, bağlantı zamanı) işlenmektedir. Üye olmanız halinde kullanıcı adı ve iletişim bilgileri gibi kişisel verileriniz işlenebilecektir.</p>
-        
-        <h3>3. Kişisel Verilerin İşlenme Amaçları</h3>
-        <p>Kişisel verileriniz; sitemizin güvenliğinin sağlanması, yasal yükümlülüklerin yerine getirilmesi, hizmetlerimizin sunulabilmesi ve geliştirilmesi amaçlarıyla işlenmektedir.</p>
+      <section id="view-privacy-policy" class="view" hidden>
+        <div class="post-detail-container">
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <h1 class="post-detail-title">Gizlilik Politikası</h1>
+          <div class="post-detail-body">
+            <p>Bu site, kullanıcı gizliliğini korumayı taahhüt eder. Siteyi ziyaret edenlerin verileri yasal düzenlemelere ve veri güvenliği standartlarına uygun olarak korunur.</p>
+          </div>
+        </div>
+      </section>
 
-        <h3>4. Kişisel Verilerin Toplanma Yöntemi ve Hukuki Sebepleri</h3>
-        <p>Verileriniz, sitemizi kullanımınız sırasında otomatik yollarla toplanmaktadır. İşlemenin hukuki sebebi KVKK madde 5/2'de belirtilen yasal yükümlülüklerimizin yerine getirilmesi ve meşru menfaatlerimizdir.</p>
+      <section id="view-cookie-policy" class="view" hidden>
+        <div class="post-detail-container">
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <h1 class="post-detail-title">Çerez Politikası</h1>
+          <div class="post-detail-body">
+            <p>Sitemizin düzgün çalışması ve hizmet kalitesinin artırılması amacıyla çeşitli çerezler (cookies) kullanmaktayız.</p>
+          </div>
+        </div>
+      </section>
 
-        <h3>5. Veri Sorumlusuna Başvuru</h3>
-        <p>KVKK 11. maddesi kapsamındaki haklarınızı kullanmak için [E-POSTA ADRESİ] üzerinden bizimle iletişime geçebilirsiniz.</p>
-      </article>
-    </section>
-
-    <section id="view-privacy-policy" class="view" hidden>
-      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
-      <article class="post-detail">
-        <h1>Gizlilik Politikası</h1>
-        <p>Bu site, kullanıcı gizliliğini korumayı taahhüt eder. Siteyi ziyaret edenlerin verileri yasal düzenlemelere ve veri güvenliği standartlarına uygun olarak korunur.</p>
-        <p>Elde edilen bilgiler, izniniz veya yasal bir zorunluluk bulunmadıkça üçüncü şahıslarla paylaşılmaz.</p>
-      </article>
-    </section>
-
-    <section id="view-cookie-policy" class="view" hidden>
-      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
-      <article class="post-detail">
-        <h1>Çerez Politikası</h1>
-        <p>Sitemizin düzgün çalışması ve hizmet kalitesinin artırılması amacıyla çeşitli çerezler (cookies) kullanmaktayız.</p>
-        <p>Çerez tercihlerinizi sayfanın alt kısmındaki "Çerez Tercihlerim" bağlantısına tıklayarak dilediğiniz zaman yönetebilirsiniz.</p>
-      </article>
-    </section>
-
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>90+3' — Saha, basit bir futbol blogu denemesidir.</p>
-    <div class="legal-footer-links">
-      <a href="#" id="link-kvkk-policy">KVKK Aydınlatma Metni</a>
-      <a href="#" id="link-privacy-policy">Gizlilik Politikası</a>
-      <a href="#" id="link-cookie-policy">Çerez Politikası</a>
-      <a href="#" id="link-cookie-settings">Çerez Tercihlerim</a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">SAHA</div>
+          <p class="footer-desc">Futbol dünyasından en güncel haberler, özel analizler, transfer dosyaları ve derinlemesine taktik incelemeleri.</p>
+        </div>
+        <div class="footer-col">
+          <h4>İçerikler</h4>
+          <div class="footer-links">
+            <a href="#">Son Haberler</a>
+            <a href="#">Transfer</a>
+            <a href="#">Maç Analizleri</a>
+            <a href="#">Taktik</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Kurumsal</h4>
+          <div class="footer-links">
+            <a href="#">Hakkımızda</a>
+            <a href="#">İletişim</a>
+            <a href="#">Yazarlarımız</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Yasal</h4>
+          <div class="footer-links">
+            <a href="#" id="link-kvkk-policy">KVKK Aydınlatma Metni</a>
+            <a href="#" id="link-privacy-policy">Gizlilik Politikası</a>
+            <a href="#" id="link-cookie-policy">Çerez Politikası</a>
+            <a href="#" id="link-cookie-settings">Çerez Tercihlerim</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 SAHA Futbol Blogu. Tüm hakları saklıdır.</span>
+        <div class="legal-footer-links">
+          <span>Versiyon 2.0.0</span>
+        </div>
+      </div>
     </div>
   </footer>
 
