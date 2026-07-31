@@ -48,17 +48,17 @@ window.addEventListener('scroll', () => {
 // Toast System
 function showToast(message, type = 'success') {
   const toast = document.createElement('div');
-  toast.className = \`toast toast-\${type}\`;
+  toast.className = `toast toast-${type}`;
   
   let icon = '';
   if (type === 'success') icon = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
   else if (type === 'error') icon = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
   
-  toast.innerHTML = \`
-    \${icon}
-    <span>\${message}</span>
+  toast.innerHTML = `
+    ${icon}
+    <span>${message}</span>
     <span class="toast-close">&times;</span>
-  \`;
+  `;
   
   toastContainer.appendChild(toast);
   
@@ -151,7 +151,7 @@ document.addEventListener('navigate-to-view', (e) => {
 
 // Auth & API Helpers
 function getAuthHeaders() {
-  return currentToken ? { 'Authorization': \`Bearer \${currentToken}\` } : {};
+  return currentToken ? { 'Authorization': `Bearer ${currentToken}` } : {};
 }
 
 function formatDate(dateStr) {
@@ -178,34 +178,34 @@ async function loadPosts() {
     // İlk yazıyı Hero'ya koy
     const heroPost = posts[0];
     heroMainCard.style.display = 'flex';
-    heroMainCard.innerHTML = \`
-      \${heroPost.image_url ? \`<img src="\${heroPost.image_url}" class="hero-image" alt="\${heroPost.title}">\` : ''}
+    heroMainCard.innerHTML = `
+      ${heroPost.image_url ? `<img src="${heroPost.image_url}" class="hero-image" alt="${heroPost.title}">` : ''}
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <span class="category-tag">\${heroPost.category_name || 'Genel'}</span>
-        <h1 class="hero-title">\${heroPost.title}</h1>
+        <span class="category-tag">${heroPost.category_name || 'Genel'}</span>
+        <h1 class="hero-title">${heroPost.title}</h1>
         <div class="hero-meta">
-          <span>\${heroPost.author}</span>
+          <span>${heroPost.author}</span>
           <span>•</span>
-          <span>\${formatDate(heroPost.created_at)}</span>
+          <span>${formatDate(heroPost.created_at)}</span>
         </div>
       </div>
-    \`;
+    `;
     heroMainCard.onclick = () => openPost(heroPost.slug || heroPost.id);
 
     // Sonraki 3 yazıyı Sidebar'a koy
     const sidebarPosts = posts.slice(1, 4);
     heroSidebarCards.innerHTML = '';
     sidebarPosts.forEach(p => {
-      heroSidebarCards.innerHTML += \`
-        <div class="sidebar-card" style="cursor:pointer;" onclick="openPost('\${p.slug || p.id}')">
-          \${p.image_url ? \`<img src="\${p.image_url}" class="sidebar-card-img" alt="\${p.title}">\` : '<div class="sidebar-card-img" style="background:#eee"></div>'}
+      heroSidebarCards.innerHTML += `
+        <div class="sidebar-card" style="cursor:pointer;" onclick="openPost('${p.slug || p.id}')">
+          ${p.image_url ? `<img src="${p.image_url}" class="sidebar-card-img" alt="${p.title}">` : '<div class="sidebar-card-img" style="background:#eee"></div>'}
           <div class="sidebar-card-content">
-            <h4>\${p.title}</h4>
-            <div style="font-size:0.75rem; color:var(--color-text-muted);">\${formatDate(p.created_at)}</div>
+            <h4>${p.title}</h4>
+            <div style="font-size:0.75rem; color:var(--color-text-muted);">${formatDate(p.created_at)}</div>
           </div>
         </div>
-      \`;
+      `;
     });
 
     // Kalan yazıları Grid'e koy (veya hepsini)
@@ -218,26 +218,26 @@ async function loadPosts() {
         const card = document.createElement('div');
         card.className = 'post-card';
         card.style.cursor = 'pointer';
-        card.innerHTML = \`
+        card.innerHTML = `
           <div class="post-card-img-wrapper">
-            \${post.image_url ? \`<img src="\${post.image_url}" alt="\${post.title}">\` : '<div style="width:100%; height:100%; background:var(--color-border);"></div>'}
+            ${post.image_url ? `<img src="${post.image_url}" alt="${post.title}">` : '<div style="width:100%; height:100%; background:var(--color-border);"></div>'}
           </div>
           <div class="post-card-content">
-            <span class="category-tag" style="align-self:flex-start; margin-bottom:0.5rem; font-size:0.65rem;">\${post.category_name || 'Genel'}</span>
-            <h2 class="post-card-title">\${post.title}</h2>
-            <p class="post-card-summary">\${post.summary || ''}</p>
+            <span class="category-tag" style="align-self:flex-start; margin-bottom:0.5rem; font-size:0.65rem;">${post.category_name || 'Genel'}</span>
+            <h2 class="post-card-title">${post.title}</h2>
+            <p class="post-card-summary">${post.summary || ''}</p>
             <div class="post-card-footer">
-              <span>\${post.author}</span>
-              <span>\${formatDate(post.created_at)}</span>
+              <span>${post.author}</span>
+              <span>${formatDate(post.created_at)}</span>
             </div>
           </div>
-        \`;
+        `;
         card.addEventListener('click', () => openPost(post.slug || post.id));
         postsGrid.appendChild(card);
       });
     }
   } catch (err) {
-    postsGrid.innerHTML = \`<p style="grid-column: 1/-1; color: var(--color-danger);">Yazılar yüklenemedi: \${err.message}</p>\`;
+    postsGrid.innerHTML = `<p style="grid-column: 1/-1; color: var(--color-danger);">Yazılar yüklenemedi: ${err.message}</p>`;
     showToast(err.message, 'error');
   }
 }
@@ -246,7 +246,7 @@ async function openPost(slugOrId) {
   showView('detail');
   postDetail.innerHTML = '<div class="skeleton" style="height:400px; border-radius:var(--radius-lg);"></div>';
   try {
-    const res = await fetch(\`\${API_URL}/\${slugOrId}\`);
+    const res = await fetch(`${API_URL}/${slugOrId}`);
     const result = await res.json();
     if (!result.success) throw new Error(result.error.message);
     
@@ -254,27 +254,27 @@ async function openPost(slugOrId) {
 
     let deleteBtnHtml = '';
     if (currentUser && (currentUser.role === 'admin' || currentUser.id === post.user_id)) {
-      deleteBtnHtml = \`<button class="btn btn-primary" onclick="deletePost(\${post.id})" style="margin-top:20px;background:var(--color-danger);color:white;border:none;">Yazıyı Sil</button>\`;
+      deleteBtnHtml = `<button class="btn btn-primary" onclick="deletePost(${post.id})" style="margin-top:20px;background:var(--color-danger);color:white;border:none;">Yazıyı Sil</button>`;
     }
 
-    postDetail.innerHTML = \`
+    postDetail.innerHTML = `
       <div class="post-detail-header">
-        <span class="category-tag" style="margin-bottom:var(--space-md);">\${post.category_name || 'Genel'}</span>
-        <h1 class="post-detail-title">\${post.title}</h1>
+        <span class="category-tag" style="margin-bottom:var(--space-md);">${post.category_name || 'Genel'}</span>
+        <h1 class="post-detail-title">${post.title}</h1>
         <div class="post-detail-meta">
-          <span>\${post.author}</span>
+          <span>${post.author}</span>
           <span>•</span>
-          <span>\${formatDate(post.created_at)}</span>
+          <span>${formatDate(post.created_at)}</span>
           <span>•</span>
-          <span>\${post.views || 0} Okunma</span>
+          <span>${post.views || 0} Okunma</span>
         </div>
       </div>
-      \${post.image_url ? \`<img src="\${post.image_url}" alt="\${post.title}" class="post-detail-image" />\` : ''}
-      <div class="post-detail-body">\${post.content}</div>
-      \${deleteBtnHtml}
-    \`;
+      ${post.image_url ? `<img src="${post.image_url}" alt="${post.title}" class="post-detail-image" />` : ''}
+      <div class="post-detail-body">${post.content}</div>
+      ${deleteBtnHtml}
+    `;
   } catch (err) {
-    postDetail.innerHTML = \`<p style="color:var(--color-danger);">Yazı yüklenemedi: \${err.message}</p>\`;
+    postDetail.innerHTML = `<p style="color:var(--color-danger);">Yazı yüklenemedi: ${err.message}</p>`;
     showToast(err.message, 'error');
   }
 }
@@ -282,7 +282,7 @@ async function openPost(slugOrId) {
 window.deletePost = async function(id) {
   if (!confirm('Bu yazıyı silmek istediğinize emin misiniz?')) return;
   try {
-    const res = await fetch(\`\${API_URL}/\${id}\`, {
+    const res = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
       headers: getAuthHeaders()
     });
@@ -307,7 +307,7 @@ loginForm.addEventListener('submit', async (e) => {
   btn.textContent = 'Bekleyin...';
   
   try {
-    const res = await fetch(\`\${AUTH_URL}/login\`, {
+    const res = await fetch(`${AUTH_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -356,7 +356,7 @@ registerForm.addEventListener('submit', async (e) => {
   btn.disabled = true;
   
   try {
-    const res = await fetch(\`\${AUTH_URL}/register\`, {
+    const res = await fetch(`${AUTH_URL}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -420,31 +420,31 @@ newPostForm.addEventListener('submit', async (e) => {
 async function loadUsers() {
   usersList.innerHTML = '<tr><td colspan="5">Yükleniyor...</td></tr>';
   try {
-    const res = await fetch(\`\${AUTH_URL}/users\`, { headers: getAuthHeaders() });
+    const res = await fetch(`${AUTH_URL}/users`, { headers: getAuthHeaders() });
     const result = await res.json();
     if (!result.success) throw new Error(result.error.message);
     
     const users = result.data.users;
-    usersList.innerHTML = users.map(u => \`
+    usersList.innerHTML = users.map(u => `
       <tr>
-        <td>\${u.id}</td>
-        <td>\${u.username}</td>
-        <td><span class="category-tag" style="font-size:0.7rem;">\${u.role}</span></td>
-        <td>\${formatDate(u.created_at)}</td>
+        <td>${u.id}</td>
+        <td>${u.username}</td>
+        <td><span class="category-tag" style="font-size:0.7rem;">${u.role}</span></td>
+        <td>${formatDate(u.created_at)}</td>
         <td>
-          \${u.role !== 'admin' ? \`<button onclick="deleteUser(\${u.id})" style="color:var(--color-danger); cursor:pointer;">Sil</button>\` : '-'}
+          ${u.role !== 'admin' ? `<button onclick="deleteUser(${u.id})" style="color:var(--color-danger); cursor:pointer;">Sil</button>` : '-'}
         </td>
       </tr>
-    \`).join('');
+    `).join('');
   } catch (err) {
-    usersList.innerHTML = \`<tr><td colspan="5" style="color:red;">Kullanıcılar yüklenemedi: \${err.message}</td></tr>\`;
+    usersList.innerHTML = `<tr><td colspan="5" style="color:red;">Kullanıcılar yüklenemedi: ${err.message}</td></tr>`;
   }
 }
 
 window.deleteUser = async function(id) {
   if (!confirm('Kullanıcıyı silmek istediğinize emin misiniz?')) return;
   try {
-    const res = await fetch(\`\${AUTH_URL}/users/\${id}\`, {
+    const res = await fetch(`${AUTH_URL}/users/${id}`, {
       method: 'DELETE',
       headers: getAuthHeaders()
     });

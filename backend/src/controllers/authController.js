@@ -102,7 +102,7 @@ async function forgotPassword(req, res) {
     // TODO: Gerçek e-posta gönderimi entegre edilecek. 
     // Şimdilik geliştirme ortamı için log basalım (Production'da kaldırılmalı).
     if (process.env.NODE_ENV !== 'production') {
-      console.log(\`[DEV ONLY] Şifre Sıfırlama Tokenı (\${username}): \${resetToken}\`);
+      console.log(`[DEV ONLY] Şifre Sıfırlama Tokenı (${username}): ${resetToken}`);
     }
 
     return sendSuccess(res, null, successMsg);
