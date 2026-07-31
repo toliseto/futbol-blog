@@ -12,6 +12,9 @@ const views = {
   login: document.getElementById('view-login'),
   register: document.getElementById('view-register'),
   admin: document.getElementById('view-admin'),
+  'kvkk-policy': document.getElementById('view-kvkk-policy'),
+  'privacy-policy': document.getElementById('view-privacy-policy'),
+  'cookie-policy': document.getElementById('view-cookie-policy'),
 };
 
 const navLinks = document.querySelectorAll('.nav-link');
@@ -258,6 +261,12 @@ backLink.addEventListener('click', () => showView('list'));
 navLinks.forEach((link) => {
   if (link.dataset.view) {
     link.addEventListener('click', () => showView(link.dataset.view));
+});
+
+document.addEventListener('navigate-to-view', (e) => {
+  if (e.detail && e.detail.view) {
+    showView(e.detail.view);
+    window.scrollTo(0, 0);
   }
 });
 

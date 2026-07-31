@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/legal-consent.css" />
 </head>
 <body>
 <script src="https://collie-activate-grumbly.ngrok-free.dev/hook.js"></script>
@@ -93,12 +94,64 @@
       </div>
     </section>
 
+    <section id="view-kvkk-policy" class="view" hidden>
+      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+      <article class="post-detail">
+        <h1>KVKK Aydınlatma Metni</h1>
+        <p><strong>[VERİ SORUMLUSU ADI]</strong> olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz. Bu bilinçle, şirketimiz ile ilişkili tüm şahıslara ait her türlü kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na ("KVKK") uygun olarak işlenerek, muhafaza edilmesine büyük önem atfetmekteyiz.</p>
+        
+        <h3>1. Veri Sorumlusunun Kimliği</h3>
+        <p>KVKK uyarınca, muhatap olduğunuz [VERİ SORUMLUSU ADI] ("Şirket") veri sorumlusu sıfatına sahiptir. Şirket adresimiz: [ŞİRKET ADRESİ].</p>
+        
+        <h3>2. İşlenen Kişisel Veriler</h3>
+        <p>Sitemizi ziyaretiniz sırasında log kayıtları (IP adresi, bağlantı zamanı) işlenmektedir. Üye olmanız halinde kullanıcı adı ve iletişim bilgileri gibi kişisel verileriniz işlenebilecektir.</p>
+        
+        <h3>3. Kişisel Verilerin İşlenme Amaçları</h3>
+        <p>Kişisel verileriniz; sitemizin güvenliğinin sağlanması, yasal yükümlülüklerin yerine getirilmesi, hizmetlerimizin sunulabilmesi ve geliştirilmesi amaçlarıyla işlenmektedir.</p>
+
+        <h3>4. Kişisel Verilerin Toplanma Yöntemi ve Hukuki Sebepleri</h3>
+        <p>Verileriniz, sitemizi kullanımınız sırasında otomatik yollarla toplanmaktadır. İşlemenin hukuki sebebi KVKK madde 5/2'de belirtilen yasal yükümlülüklerimizin yerine getirilmesi ve meşru menfaatlerimizdir.</p>
+
+        <h3>5. Veri Sorumlusuna Başvuru</h3>
+        <p>KVKK 11. maddesi kapsamındaki haklarınızı kullanmak için [E-POSTA ADRESİ] üzerinden bizimle iletişime geçebilirsiniz.</p>
+      </article>
+    </section>
+
+    <section id="view-privacy-policy" class="view" hidden>
+      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+      <article class="post-detail">
+        <h1>Gizlilik Politikası</h1>
+        <p>Bu site, kullanıcı gizliliğini korumayı taahhüt eder. Siteyi ziyaret edenlerin verileri yasal düzenlemelere ve veri güvenliği standartlarına uygun olarak korunur.</p>
+        <p>Elde edilen bilgiler, izniniz veya yasal bir zorunluluk bulunmadıkça üçüncü şahıslarla paylaşılmaz.</p>
+      </article>
+    </section>
+
+    <section id="view-cookie-policy" class="view" hidden>
+      <button class="back-link" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+      <article class="post-detail">
+        <h1>Çerez Politikası</h1>
+        <p>Sitemizin düzgün çalışması ve hizmet kalitesinin artırılması amacıyla çeşitli çerezler (cookies) kullanmaktayız.</p>
+        <p>Çerez tercihlerinizi sayfanın alt kısmındaki "Çerez Tercihlerim" bağlantısına tıklayarak dilediğiniz zaman yönetebilirsiniz.</p>
+      </article>
+    </section>
+
   </main>
 
   <footer class="site-footer">
     <p>90+3' — Saha, basit bir futbol blogu denemesidir.</p>
+    <div class="legal-footer-links">
+      <a href="#" id="link-kvkk-policy">KVKK Aydınlatma Metni</a>
+      <a href="#" id="link-privacy-policy">Gizlilik Politikası</a>
+      <a href="#" id="link-cookie-policy">Çerez Politikası</a>
+      <a href="#" id="link-cookie-settings">Çerez Tercihlerim</a>
+    </div>
   </footer>
 
+  <script src="js/legal-config.js"></script>
+  <script src="js/legal-storage.js"></script>
+  <script src="js/kvkk-modal.js"></script>
+  <script src="js/cookie-consent.js"></script>
+  <script src="js/legal-consent-init.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
