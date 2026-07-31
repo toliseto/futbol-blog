@@ -140,6 +140,9 @@ document.querySelectorAll('[data-view]').forEach(btn => {
       loadPosts(slug);
       return;
     }
+    if (view === 'list') {
+      loadPosts();
+    }
     showView(view);
   });
 });
