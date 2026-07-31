@@ -48,6 +48,8 @@ async function fetchAndSaveESPNNews() {
         const slug = `${baseSlug}-${randomString}`;
         
         const content = `${description}<br><br><a href="${link}" target="_blank" rel="noopener noreferrer">ESPN Üzerinde Okumaya Devam Et</a>`;
+        
+        let imageUrl = item.enclosure?.url || 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
 
         await postModel.createPost({
           title: title,
@@ -55,7 +57,7 @@ async function fetchAndSaveESPNNews() {
           summary: description.substring(0, 150) + '...',
           content: content,
           category_id: categoryId,
-          image_url: null, // ESPN RSS feed doesn't always provide images in a standard enclosure for this feed
+          image_url: imageUrl,
           status: 'published',
           seo_title: title,
           seo_description: description.substring(0, 150),

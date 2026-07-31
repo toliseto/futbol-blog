@@ -134,6 +134,8 @@ input, textarea, select {
 }
 
 /* 3. Layout Utilities */
+[hidden] { display: none !important; }
+
 .container {
   width: 100%;
   max-width: var(--container-width);

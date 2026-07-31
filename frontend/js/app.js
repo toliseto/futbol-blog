@@ -183,6 +183,7 @@ async function loadPosts(categorySlug = null) {
     // İlk yazıyı Hero'ya koy
     const heroPost = posts[0];
     heroMainCard.style.display = 'flex';
+    heroSidebarCards.style.display = 'flex';
     heroMainCard.innerHTML = `
       ${heroPost.image_url ? `<img src="${heroPost.image_url}" class="hero-image" alt="${heroPost.title}">` : ''}
       <div class="hero-overlay"></div>
