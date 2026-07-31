@@ -102,7 +102,7 @@
       <!-- Detay Sayfası -->
       <section id="view-detail" class="view" hidden>
         <div class="post-detail-container">
-          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" data-view="list">← Ana Sayfaya Dön</button>
           <article id="post-detail"></article>
         </div>
       </section>
@@ -213,7 +213,7 @@
       <!-- Legal Sayfalar -->
       <section id="view-kvkk-policy" class="view" hidden>
         <div class="post-detail-container">
-          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" data-view="list">← Ana Sayfaya Dön</button>
           <h1 class="post-detail-title">KVKK Aydınlatma Metni</h1>
           <div class="post-detail-body">
             <p><strong>[VERİ SORUMLUSU ADI]</strong> olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz. Bu bilinçle, şirketimiz ile ilişkili tüm şahıslara ait her türlü kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na ("KVKK") uygun olarak işlenerek, muhafaza edilmesine büyük önem atfetmekteyiz.</p>
@@ -225,7 +225,7 @@
 
       <section id="view-privacy-policy" class="view" hidden>
         <div class="post-detail-container">
-          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" data-view="list">← Ana Sayfaya Dön</button>
           <h1 class="post-detail-title">Gizlilik Politikası</h1>
           <div class="post-detail-body">
             <p>Bu site, kullanıcı gizliliğini korumayı taahhüt eder. Siteyi ziyaret edenlerin verileri yasal düzenlemelere ve veri güvenliği standartlarına uygun olarak korunur.</p>
@@ -235,7 +235,7 @@
 
       <section id="view-cookie-policy" class="view" hidden>
         <div class="post-detail-container">
-          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" onclick="document.dispatchEvent(new CustomEvent('navigate-to-view', { detail: { view: 'list' } }))">← Ana Sayfaya Dön</button>
+          <button class="btn btn-outline" style="margin-bottom: var(--space-lg);" data-view="list">← Ana Sayfaya Dön</button>
           <h1 class="post-detail-title">Çerez Politikası</h1>
           <div class="post-detail-body">
             <p>Sitemizin düzgün çalışması ve hizmet kalitesinin artırılması amacıyla çeşitli çerezler (cookies) kullanmaktayız.</p>

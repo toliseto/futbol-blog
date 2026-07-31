@@ -149,6 +149,9 @@ document.querySelectorAll('[data-view]').forEach(btn => {
 
 document.addEventListener('navigate-to-view', (e) => {
   if (e.detail && e.detail.view) {
+    if (e.detail.view === 'list') {
+      loadPosts();
+    }
     showView(e.detail.view);
   }
 });
