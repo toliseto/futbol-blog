@@ -1,6 +1,17 @@
 const postModel = require('../models/postModel');
 const { sendSuccess, sendError } = require('../utils/response');
-const sanitizeHtml = require('sanitize-html');
+const xss = require('xss');
+
+const xssOptions = {
+  whiteList: {
+    ...xss.whiteList,
+    img: ['src', 'alt', 'width', 'height'],
+    iframe: ['src', 'width', 'height', 'allowfullscreen'],
+    h1: [],
+    h2: []
+  }
+};
+const myXss = new xss.FilterXSS(xssOptions);
 
 function slugify(text) {
   const trMap = { 'çÇ': 'c', 'ğĞ': 'g', 'şŞ': 's', 'üÜ': 'u', 'ıİ': 'i', 'öÖ': 'o' };
@@ -44,7 +55,7 @@ async function getPost(req, res) {
     let post;
     
     // Eğer param bir sayıysa ID olarak dene, değilse slug
-    if (/^\\d+$/.test(slugOrId)) {
+    if (/^\d+$/.test(slugOrId)) {
       post = await postModel.getPostById(slugOrId);
     } else {
       post = await postModel.getPostBySlug(slugOrId);
@@ -74,14 +85,7 @@ async function createPost(req, res) {
     }
 
     // XSS Koruması
-    const cleanContent = sanitizeHtml(content, {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'iframe']),
-      allowedAttributes: {
-        ...sanitizeHtml.defaults.allowedAttributes,
-        'img': ['src', 'alt', 'width', 'height'],
-        'iframe': ['src', 'width', 'height', 'allowfullscreen']
-      }
-    });
+    const cleanContent = myXss.process(content);
 
     // Slug oluşturma
     let slug = req.body.slug;
@@ -131,9 +135,7 @@ async function updatePost(req, res) {
     // Kısmi güncelleme (Gönderilmeyen alanları eskisinden al)
     title = title || existing.title;
     content = content || existing.content;
-    const cleanContent = sanitizeHtml(content, {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'iframe'])
-    });
+    const cleanContent = myXss.process(content);
 
     const updatedPost = await postModel.updatePost(id, {
       title,
