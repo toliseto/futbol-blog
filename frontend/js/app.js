@@ -209,15 +209,18 @@ async function loadPosts(categorySlug = null) {
     const sidebarPosts = posts.slice(1, 4);
     heroSidebarCards.innerHTML = '';
     sidebarPosts.forEach(p => {
-      heroSidebarCards.innerHTML += `
-        <div class="sidebar-card" style="cursor:pointer;" onclick="openPost('${p.slug || p.id}')">
+      const card = document.createElement('div');
+      card.className = 'sidebar-card';
+      card.style.cursor = 'pointer';
+      card.innerHTML = `
           ${p.image_url ? `<img src="${p.image_url}" class="sidebar-card-img" alt="${p.title}">` : '<div class="sidebar-card-img" style="background:#eee"></div>'}
           <div class="sidebar-card-content">
             <h4>${p.title}</h4>
             <div style="font-size:0.75rem; color:var(--color-text-muted);">${formatDate(p.created_at)}</div>
           </div>
-        </div>
       `;
+      card.addEventListener('click', () => openPost(p.slug || p.id));
+      heroSidebarCards.appendChild(card);
     });
 
     // Kalan yazıları Grid'e koy (veya hepsini)
@@ -266,7 +269,7 @@ async function openPost(slugOrId) {
 
     let deleteBtnHtml = '';
     if (currentUser && (currentUser.role === 'admin' || currentUser.id === post.user_id)) {
-      deleteBtnHtml = `<button class="btn btn-primary" onclick="deletePost(${post.id})" style="margin-top:20px;background:var(--color-danger);color:white;border:none;">Yazıyı Sil</button>`;
+      deleteBtnHtml = `<button id="delete-post-btn" class="btn btn-primary" style="margin-top:20px;background:var(--color-danger);color:white;border:none;">Yazıyı Sil</button>`;
     }
 
     postDetail.innerHTML = `
@@ -285,6 +288,10 @@ async function openPost(slugOrId) {
       <div class="post-detail-body">${post.content}</div>
       ${deleteBtnHtml}
     `;
+
+    if (deleteBtnHtml) {
+      document.getElementById('delete-post-btn').addEventListener('click', () => deletePost(post.id));
+    }
   } catch (err) {
     postDetail.innerHTML = `<p style="color:var(--color-danger);">Yazı yüklenemedi: ${err.message}</p>`;
     showToast(err.message, 'error');
@@ -437,17 +444,24 @@ async function loadUsers() {
     if (!result.success) throw new Error(result.error.message);
     
     const users = result.data.users;
-    usersList.innerHTML = users.map(u => `
-      <tr>
-        <td>${u.id}</td>
-        <td>${u.username}</td>
-        <td><span class="category-tag" style="font-size:0.7rem;">${u.role}</span></td>
-        <td>${formatDate(u.created_at)}</td>
-        <td>
-          ${u.role !== 'admin' ? `<button onclick="deleteUser(${u.id})" style="color:var(--color-danger); cursor:pointer;">Sil</button>` : '-'}
-        </td>
-      </tr>
-    `).join('');
+    usersList.innerHTML = '';
+    users.forEach(u => {
+      usersList.innerHTML += `
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.username}</td>
+          <td><span class="category-tag" style="font-size:0.7rem;">${u.role}</span></td>
+          <td>${formatDate(u.created_at)}</td>
+          <td>
+            ${u.role !== 'admin' ? `<button class="delete-user-btn" data-id="${u.id}" style="color:var(--color-danger); cursor:pointer;">Sil</button>` : '-'}
+          </td>
+        </tr>
+      `;
+    });
+
+    document.querySelectorAll('.delete-user-btn').forEach(btn => {
+      btn.addEventListener('click', () => deleteUser(btn.dataset.id));
+    });
   } catch (err) {
     usersList.innerHTML = `<tr><td colspan="5" style="color:red;">Kullanıcılar yüklenemedi: ${err.message}</td></tr>`;
   }
