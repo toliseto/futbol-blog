@@ -135,8 +135,9 @@ document.querySelectorAll('[data-view]').forEach(btn => {
     e.preventDefault();
     const view = btn.dataset.view;
     if (view === 'category') {
-      // TODO: Kategori filtreleme
-      showToast('Kategori filtreleme yakında eklenecek.', 'warning');
+      const slug = btn.dataset.slug;
+      showView('list');
+      loadPosts(slug);
       return;
     }
     showView(view);
@@ -160,9 +161,13 @@ function formatDate(dateStr) {
 }
 
 // Load Posts
-async function loadPosts() {
+async function loadPosts(categorySlug = null) {
   try {
-    const res = await fetch(API_URL);
+    let url = API_URL;
+    if (categorySlug) {
+      url += `?category=${categorySlug}`;
+    }
+    const res = await fetch(url);
     const result = await res.json();
     
     if (!result.success) throw new Error(result.error.message);

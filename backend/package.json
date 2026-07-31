@@ -18,7 +18,9 @@
     "express-rate-limit": "^8.6.1",
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
+    "node-cron": "^4.6.0",
     "pg": "^8.12.0",
+    "rss-parser": "^3.13.0",
     "xss": "^1.0.15",
     "xss-clean": "^0.1.4"
   },

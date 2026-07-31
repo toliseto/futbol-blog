@@ -3,7 +3,7 @@ const pool = require('../config/db');
 async function getAllPosts(limit = 10, offset = 0, categorySlug = null, search = null) {
   let query = `
     SELECT p.id, p.title, p.slug, p.summary, p.image_url, p.views, p.created_at, p.status, 
-           u.username as author, c.name as category_name, c.slug as category_slug
+           COALESCE(u.username, 'ESPN Bot') as author, c.name as category_name, c.slug as category_slug
     FROM posts p
     LEFT JOIN users u ON p.user_id = u.id
     LEFT JOIN categories c ON p.category_id = c.id
@@ -54,7 +54,7 @@ async function getAllPosts(limit = 10, offset = 0, categorySlug = null, search =
 
 async function getPostBySlug(slug) {
   const result = await pool.query(
-    `SELECT p.*, u.username as author, u.avatar_url as author_avatar, u.bio as author_bio, c.name as category_name, c.slug as category_slug
+    `SELECT p.*, COALESCE(u.username, 'ESPN Bot') as author, u.avatar_url as author_avatar, u.bio as author_bio, c.name as category_name, c.slug as category_slug
      FROM posts p
      LEFT JOIN users u ON p.user_id = u.id
      LEFT JOIN categories c ON p.category_id = c.id
@@ -66,7 +66,7 @@ async function getPostBySlug(slug) {
 
 async function getPostById(id) {
   const result = await pool.query(
-    `SELECT p.*, u.username as author, c.name as category_name 
+    `SELECT p.*, COALESCE(u.username, 'ESPN Bot') as author, c.name as category_name 
      FROM posts p
      LEFT JOIN users u ON p.user_id = u.id
      LEFT JOIN categories c ON p.category_id = c.id 

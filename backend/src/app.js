@@ -5,8 +5,20 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cron = require('node-cron');
+const { fetchAndSaveESPNNews } = require('./services/espnScraper');
 
 const app = express();
+
+// ESPN Bot Cron Job - Her saat başı çalışır (0 * * * *)
+// Test amaçlı ilk başlangıçta da çalıştıralım:
+setTimeout(() => {
+  fetchAndSaveESPNNews();
+}, 5000); // Sunucu başladıktan 5 saniye sonra ilk tarama
+
+cron.schedule('0 * * * *', () => {
+  fetchAndSaveESPNNews();
+});
 
 // Security Headers (Helmet)
 // Sadece gerekli olanlara izin vermek için yapılandırma
